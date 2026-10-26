@@ -1,0 +1,39 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ParcelDelivery.GrpcServer";
+
+package shipment;
+
+service ShipmentService {
+
+  rpc CreateShipment (CreateShipmentRequest)
+      returns (ShipmentResponse);
+
+  rpc GetShipment (GetShipmentRequest)
+      returns (ShipmentResponse);
+
+  rpc UpdateShipmentStatus (UpdateShipmentStatusRequest)
+      returns (ShipmentResponse);
+}
+
+message CreateShipmentRequest {
+  string sender = 1;
+  string recipient = 2;
+}
+
+message GetShipmentRequest {
+  string tracking_number = 1;
+}
+
+message UpdateShipmentStatusRequest {
+  string tracking_number = 1;
+  string status = 2;
+}
+
+message ShipmentResponse {
+  string tracking_number = 1;
+  string sender = 2;
+  string recipient = 3;
+  string status = 4;
+  string created_at = 5;
+}
